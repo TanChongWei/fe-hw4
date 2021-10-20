@@ -22,7 +22,10 @@ export const useMovieComments = (movieId) => {
     const [data, setData] = React.useState(undefined);
     const { accessToken } = useAuth();
 
-    const loadData = (movieId) => getMovieComments(movieId).then(setData);
+    const loadData = (movieId) => getMovieComments(movieId).then((res) => {
+        console.log(res)
+        setData(res)
+    });
 
     React.useEffect(() => {
         if (accessToken) {

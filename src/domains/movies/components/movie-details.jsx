@@ -29,7 +29,7 @@ export const MovieDetails = ({ movieId }) => {
             console.log('comment field must not be empty')
             return
         }
-        fetchJson(BASE_URL + '/movie/comment', {
+        fetchJson(`${BASE_URL}/movie/comment`, {
             method: 'POST',
             headers: {
                 accept: 'application/json',
@@ -49,7 +49,7 @@ export const MovieDetails = ({ movieId }) => {
     };
 
     const deleteComment = (commentId) =>
-        fetchJson(BASE_URL + '/movie/comment/' + commentId, {
+        fetchJson(`${BASE_URL}/movie/comment/${commentId}`, {
             method: 'DELETE',
             headers: {
                 accept: 'application/json',

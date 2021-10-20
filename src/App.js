@@ -6,7 +6,7 @@ import { RegisterPage } from './pages/register';
 import { Movies } from './pages/movies';
 import { MovieDetailsPage } from './pages/movieDetails';
 
-const Routes = () => {
+const App = () => {
     const { status } = useAuth();
 
     const authRoutes = (
@@ -48,4 +48,4 @@ const Routes = () => {
     );
 };
 
-export default Routes;
+export default App;
