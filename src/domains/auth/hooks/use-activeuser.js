@@ -6,7 +6,7 @@ export const useActiveUser = () => {
     const { accessToken } = useAuth();
     return useQuery(['activeUser', accessToken], () =>
         getActiveUser(accessToken, {
-            staleTime: 3000,
+            staleTime: 5000,
         })
     );
-};
+};;

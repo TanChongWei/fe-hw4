@@ -10,39 +10,41 @@ const Routes = () => {
     const { status } = useAuth();
 
     const authRoutes = (
-        <>
+        <Switch>
             <Route path="/movies/:movieId">
                 <MovieDetailsPage />
             </Route>
             <Route path="/movies" exact>
                 <Movies />
             </Route>
-        </>
+            <Route path="*">
+                <Redirect
+                    to={status !== 'authenticated' ? '/login' : '/movies'}
+                />
+            </Route>
+        </Switch>
     )
 
-    const unAuthRoutes = (<>
+    const unAuthRoutes = (
+    <Switch>
         <Route path="/login">
             <LoginPage />
         </Route>
         <Route path="/register">
             <RegisterPage />
         </Route>
-    </>
-)
-
-    return (
-        <Switch>
-            {status === 'authenticated' ? authRoutes : unAuthRoutes}
-
-            <Route path="/" exact>
+        <Route path="*">
                 <Redirect
                     to={status !== 'authenticated' ? '/login' : '/movies'}
                 />
-            </Route>
-            <Route path="*">
-                Invalid url
-            </Route>
-        </Switch>
+        </Route>
+    </Switch>
+)
+
+    return (
+        <>
+        {status === 'authenticated' ? authRoutes : unAuthRoutes}
+        </>
     );
 };
 

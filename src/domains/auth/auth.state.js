@@ -1,11 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { fetchJson } from '../../lib/fetch-json';
 
 const BASE_URL = "https://ecomm-service.herokuapp.com"
-const ACCESS_TOKEN_STORAGE = 'auth';
-
-const storedAccessToken = localStorage.getItem(ACCESS_TOKEN_STORAGE);
-
+const storedAccessToken = window.localStorage.getItem('authToken');
 const AUTH_DEFAULT_STATE = storedAccessToken
     ? {
           status: 'authenticated',
@@ -97,7 +94,7 @@ const register = async ({ name, email, password, avatar }) => {
     });
 
     if (!confirmation.name || !confirmation.email || !confirmation.avatar) {
-        throw new Error('There was an error when registering.');
+        throw new Error('Registration error.');
     }
 
     return confirmation;
@@ -112,7 +109,7 @@ export const useLogin = () => {
     return function invokeLogin({ email, password }) {
         return login(email, password).then((res) => {
             auth.login(res.access_token);
-            localStorage.setItem(ACCESS_TOKEN_STORAGE, res.access_token);
+            window.localStorage.setItem('authToken', res.access_token);
         });
     };
 };
@@ -142,6 +139,6 @@ export const useLogout = () => {
 
     return () => {
         auth.logout();
-        localStorage.removeItem(ACCESS_TOKEN_STORAGE);
+        window.localStorage.removeItem('authToken');
     };
 };

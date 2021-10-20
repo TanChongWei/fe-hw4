@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { getMovieDetails, getMovies, getMovieComments } from '../movie.service';
 import { useAuth } from '../../../domains/auth';
@@ -18,10 +18,11 @@ export const useMovies = () => {
 };
 
 export const useMovieComments = (movieId) => {
-    const [comments, setMovieComments] = React.useState(undefined);
+    console.log('using comments')
+    const [data, setData] = React.useState(undefined);
     const { accessToken } = useAuth();
 
-    const loadData = (movieId) => getMovieComments(movieId).then(setMovieComments);
+    const loadData = (movieId) => getMovieComments(movieId).then(setData);
 
     React.useEffect(() => {
         if (accessToken) {
@@ -35,7 +36,7 @@ export const useMovieComments = (movieId) => {
     }, [accessToken, movieId]);
 
     return {
-        comments,
+        data,
         loadData: () => loadData(movieId),
     };
 };
