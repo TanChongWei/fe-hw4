@@ -10,7 +10,7 @@ export const RegisterForm = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [avatar, setAvatar] = React.useState(
-        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.spiritanimal.info%2Fpictures%2Fcat%2FCat-Spirit-Animal-3.jpg&f=1&nofb=1'
+        'http://github.com/malcolm-kee.png'
     );
     const [status, setStatus] = React.useState('idle');
     const register = useRegister();

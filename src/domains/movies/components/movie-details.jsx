@@ -22,8 +22,7 @@ export const MovieDetails = ({ movieId }) => {
 
     const addComment = () => {
         console.log('adding comment')
-        console.log(accessToken)
-        fetch(BASE_URL + '/movie/comment', {
+        fetch(`${BASE_URL}/movie/comment`, {
             method: 'POST',
             headers: {
                 accept: 'application/json',
@@ -31,11 +30,11 @@ export const MovieDetails = ({ movieId }) => {
                 Authorization: `Bearer ${accessToken}`,
             },
             body:  {
-                rating: parseInt(commentRating),
+                rating: Number(commentRating),
                 movieId,
                 content: comment,
             },
-        }).then(res => res.json())
+        })
         .then(() => {
             setCommentRating(5);
             setComment('');

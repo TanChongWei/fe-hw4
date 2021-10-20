@@ -4,6 +4,39 @@ import { Link } from 'react-router-dom';
 export const AppShell = ({ children }) => {
     const { status } = useAuth();
 
+    const movieLink = (
+        <div className="flex items-center gap-4">
+            <Link
+                to="/movies"
+                className="text-sm font-medium text-gray-700 hover:text-gray-800"
+            >
+                Movies
+            </Link>
+        </div>
+    )
+
+    const logout = (
+        <div className="flex gap-3">
+            <LogoutButton />
+        </div>
+    )
+    const loginAndRegister = (
+        <div className="flex gap-3">
+            <Link
+                to="/login"
+                className="text-sm px-4 py-1 text-pink-500"
+            >
+                Login
+            </Link>
+            <Link
+                to="/register"
+                className="text-sm px-4 py-1 text-pink-500"
+            >
+                Register
+            </Link>
+        </div>
+    )
+
     return (
         <div>
             <header className="md:sticky md:top-0 bg-white md:z-10">
@@ -16,39 +49,9 @@ export const AppShell = ({ children }) => {
                             >
                                 React Lover
                             </Link>
-                            {status === 'authenticated' ? (
-                                <div className="flex items-center gap-4">
-                                    <Link
-                                        to="/movies"
-                                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                                    >
-                                        Movies
-                                    </Link>
-                                </div>
-                            ) : (
-                                <></>
-                            )}
+                            {status === 'authenticated' ? movieLink : <></>}
                         </nav>
-                        {status === 'authenticated' ? (
-                            <div className="flex gap-3">
-                                <LogoutButton />
-                            </div>
-                        ) : (
-                            <div className="flex gap-3">
-                                <Link
-                                    to="/login"
-                                    className="text-sm px-4 py-1 text-pink-500"
-                                >
-                                    Login
-                                </Link>
-                                <Link
-                                    to="/register"
-                                    className="text-sm px-4 py-1 text-pink-500"
-                                >
-                                    Register
-                                </Link>
-                            </div>
-                        )}
+                        {status === 'authenticated' ?  logout: loginAndRegister}
                     </div>
                 </div>
             </header>
